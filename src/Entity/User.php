@@ -3,34 +3,29 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column(nullable: false)]
+    #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column(length: 255)]
+    /**
+     * @var string The hashed password
+     */
+    #[ORM\Column]
     private ?string $password = null;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Rate::class, orphanRemoval: true)]
-    private Collection $userRates;
-
-    public function __construct()
-    {
-        $this->userRates = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -48,7 +43,18 @@ class User
 
         return $this;
     }
-/**
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -67,7 +73,10 @@ class User
         return $this;
     }
 
-    public function getPassword(): ?string
+    /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
     {
         return $this->password;
     }
@@ -80,32 +89,11 @@ class User
     }
 
     /**
-     * @return Collection<int, Rate>
+     * @see UserInterface
      */
-    public function getUserRates(): Collection
+    public function eraseCredentials()
     {
-        return $this->userRates;
-    }
-
-    public function addUserRate(Rate $userRate): self
-    {
-        if (!$this->userRates->contains($userRate)) {
-            $this->userRates->add($userRate);
-            $userRate->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserRate(Rate $userRate): self
-    {
-        if ($this->userRates->removeElement($userRate)) {
-            // set the owning side to null (unless already changed)
-            if ($userRate->getUser() === $this) {
-                $userRate->setUser(null);
-            }
-        }
-
-        return $this;
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
