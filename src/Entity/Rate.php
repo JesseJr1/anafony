@@ -24,6 +24,10 @@ class Rate
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'rateProduct')]
+    private ?Review $review = null;
+
     
     public function __construct()
     {
@@ -80,6 +84,18 @@ class Rate
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getReview(): ?Review
+    {
+        return $this->review;
+    }
+
+    public function setReview(?Review $review): self
+    {
+        $this->review = $review;
 
         return $this;
     }

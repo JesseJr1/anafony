@@ -23,6 +23,7 @@ class Category
     private ?string $description = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
@@ -35,6 +36,11 @@ class Category
     {
         $this->children = new ArrayCollection();
         $this->products = new ArrayCollection();
+    }
+
+        public function __toString()
+    {
+        return $this->getTitle();
     }
 
     public function getId(): ?int
