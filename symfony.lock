@@ -263,6 +263,9 @@
             "webpack.config.js"
         ]
     },
+    "twig/extra-bundle": {
+        "version": "v3.5.0"
+    },
     "vich/uploader-bundle": {
         "version": "2.0",
         "recipe": {

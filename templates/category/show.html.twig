@@ -13,8 +13,9 @@
 			<div class="col">
 				<h2>{{ product.name}}</h2>
 				<p>{{product.description}}</p>
-				<a href=" {{path('app_product', {id: product.id}) }} ">Voir</a>
+				<a href=" {{path('app_products') }} ">Voir</a>
 			</div>
+			show category
 
 		{% endfor %}
 	</div>

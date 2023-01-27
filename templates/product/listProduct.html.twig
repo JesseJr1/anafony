@@ -9,9 +9,10 @@
 		{% for product in products %}
 
 			<div class="col">
-				<h2>{{ product.name}}</h2>
-				<a href=" {{ path('app_product', { id: product.id}) }} " >Voir</a>
+				<h2>{{ product.id}}</h2>
+				<a href=" {{ path('app_product_detail', { id: product.id}) }} " >Voir le detail</a>
 			{% endfor %}
+			list product
 		</div>
 	</div>
 
