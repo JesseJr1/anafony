@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos categories
+{% endblock %}
+
+{% block body %}
+
+	<h1>Nos categories</h1>
+
+	<div class="container">
+		{% for category in categories %}
+
+			<div class="col">
+				<h2>{{ category.title}}</h2>
+				<a href=" {{path('app_category', {id: category.id}) }} ">Voir</a>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}
