@@ -14,7 +14,7 @@ class ProductFixtures extends Fixture
     {
         $products = [];
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             $product = new Product();
             $product->setName('Tablet as a laptop' . $i);
             $product->setCategory($this->getReference(CategoryFixtures::CATEGORY_LAPTOP));

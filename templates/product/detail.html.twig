@@ -2,18 +2,36 @@
 {% block title %}detail du produit
 {% endblock %}
 {% block body %}
-	{% for product in products %}
-		{% include "_parts/productDetailsCard.html.twig" %}
+	{# {% for product in products %} #}
+		{% include "_parts/productDetailCard.html.twig" %}
 		<div>
-			<h2>{{ product.name}}</h2>
-			{% if product.productImages | length > 0 %}
-				<img src="{{ asset('product-images/' ~ product.productImages[0].path) }}" width="300"/>
-			{% endif %}
-			<span>{{ product.price |format_currency('EUR', locale='fr') }}</span>
+			<h2>{# {{ product.name}} #}product.name</h2>
+			{# {% if product.productImages | length > 0 %} #}
+				{# <img src="{{ asset('product-images/' ~ product.productImages[0].path) }}" width="300"/> #}
+			{# {% endif %} #}
+			<span>{# {{ product.price |format_currency('EUR', locale='fr') }} #} product.price format_currency</span>
 		</div>
-	{% else %}
+	{# {% else %} #}
 		Aucun produit dans l'Univers
-		{{ category.title }}.
-	{% endfor %}
+		{# {{ category.title }} #}.
+	{# {% endfor %} #}
+
+    <h2>Ajout d'un commentaire</h2>
+
+			<div class="comment-form-wrap pt-5">
+
+				{% if app.user %}
+					{{ form_start(reviewForm) }}
+					{{ form_widget(reviewForm) }}
+					{# <button type="submit" class="btn btn-primary">Create!</button> #}
+					{{ form_end(reviewForm) }}
+					{# {{form(reviewForm)}} #}
+
+				{% else %}
+					Vous devez etre co pour deposeer un comm
+					<a href="{{ path('app_login')}}">login</a>
+				{% endif %}
+			</div>
+		</div>
 
 {% endblock %}
