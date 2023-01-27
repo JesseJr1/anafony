@@ -20,7 +20,7 @@ class ProductPicture
     private ?int $position = null;
 
     #[ORM\ManyToOne(inversedBy: 'picture')]
-    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(nullable: true,)]
     private ?Product $product = null;
 
     public function getId(): ?int

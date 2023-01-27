@@ -29,20 +29,29 @@ class Product
     private ?string $manual = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Category $category = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductPicture::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $picture;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Rate::class, orphanRemoval: true)]
     private Collection $productRates;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Review::class)]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->picture = new ArrayCollection();
         $this->productRates = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
+
+    public function __toString()
+        {
+            return $this->getName();
+        }
 
     public function getId(): ?int
     {
@@ -163,6 +172,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($productRate->getProduct() === $this) {
                 $productRate->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): self
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): self
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getProduct() === $this) {
+                $review->setProduct(null);
             }
         }
 
