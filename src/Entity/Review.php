@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Rate;
 use App\Repository\ReviewRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
