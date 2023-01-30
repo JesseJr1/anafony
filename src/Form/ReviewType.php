@@ -46,22 +46,22 @@ class ReviewType extends AbstractType
                 'mapped' => false
             ])
             
-            // ->add('rate', ChoiceType::class, [
-            //     'choices' => [
-            //         '1' => 1,
-            //         '2' => 2,
-            //         '3' => 3,
-            //         '4' => 4,
-            //         '5' => 5,
-            //     ],
-            //     'attr' => [
-            //         'class' => 'form-select'
-            //     ],
-            //     'label' => 'Noter le produit',
-            //     'label_attr' => [
-            //         'class' => 'form-label mt-4'
-            //     ]
-            // ])
+            ->add('rateProduct', ChoiceType::class, [
+                'choices' => [
+                    '1' => 1,
+                    '2' => 2,
+                    '3' => 3,
+                    '4' => 4,
+                    '5' => 5,
+                ],
+                'attr' => [
+                    'class' => 'form-select'
+                ],
+                'label' => 'Noter le produit',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ]
+            ])
             ->add('envoyer', SubmitType::class);
     }
 
