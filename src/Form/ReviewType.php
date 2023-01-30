@@ -62,7 +62,12 @@ class ReviewType extends AbstractType
                     'class' => 'form-label mt-4'
                 ]
             ])
-            ->add('envoyer', SubmitType::class);
+            ->add('send', SubmitType::class, [
+                'label' =>'Envoyer',
+                'attr' => [
+                    'class' => 'mt-3 btn btn-primary'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
