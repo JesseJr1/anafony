@@ -54,13 +54,14 @@ class ReviewType extends AbstractType
                     '4' => 4,
                     '5' => 5,
                 ],
-                'attr' => [
+                'expanded' => true
+                /* 'attr' => [
                     'class' => 'form-select'
                 ],
                 'label' => 'Noter le produit',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ] */
             ])
             ->add('send', SubmitType::class, [
                 'label' =>'Envoyer',
