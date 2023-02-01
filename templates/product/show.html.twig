@@ -5,7 +5,20 @@
 
 
 {% block body %}
+
 	<h1>{{product.name}}</h1>
+
+	{# <ul class="comment-list mt-5">
+		{% for product in product %}
+			<li class="comment">
+				<div class="form-control">
+					<h3> {{product.nickname}} </h3>
+					<p>{{product.email}}</p>
+					<p>{{product.content}}</p>
+				</div>
+			</li>
+		{% endfor %}
+	</ul> #}
 
 	<div class="container">
 		{% for product in product %}
